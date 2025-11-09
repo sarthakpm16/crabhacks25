@@ -1,65 +1,337 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { copy } from "./copy";
+import { AnimatedCounter } from "./components/AnimatedCounter";
+import { SponsorMarquee } from "./components/SponsorMarquee";
+import { 
+  Globe, Smartphone, Brain, Zap, Cloud, Link,
+  Pizza, Gift, Trophy, Users, DollarSign, Clock,
+  GraduationCap, Coffee, BookOpen, MapPin
+} from "lucide-react";
+
+const iconMap: Record<string, any> = {
+  globe: Globe,
+  smartphone: Smartphone,
+  brain: Brain,
+  zap: Zap,
+  cloud: Cloud,
+  link: Link,
+};
 
 export default function Home() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const scheduleByDay = {
+    friday: copy.schedule.filter(item => item.day === "friday"),
+    saturday: copy.schedule.filter(item => item.day === "saturday"),
+    sunday: copy.schedule.filter(item => item.day === "sunday"),
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div className="min-h-screen">
+      <header className="crab-header">
+        <nav className="crab-nav">
+          <div className="crab-container">
+            <div className="crab-nav-content">
+              <h2 className="crab-logo">crabhacks</h2>
+              <div className="crab-nav-links">
+                <a href="#about" className="crab-nav-link">about</a>
+                <a href="#schedule" className="crab-nav-link">schedule</a>
+                <a href="#faq" className="crab-nav-link">faq</a>
+                <a href="#register" className="crab-nav-link crab-nav-link-cta">
+                  register
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section className="crab-hero">
+          <div className="crab-container">
+            <div className="crab-hero-content">
+              <div className="crab-hero-badge">
+                {copy.event.tagline}
+              </div>
+              <h1 className="crab-title">
+                {copy.event.name} {copy.event.year}
+              </h1>
+              <p className="crab-tagline">{copy.event.description}</p>
+              
+              <div className="crab-hero-info">
+                <div className="crab-hero-info-item">
+                  <MapPin className="crab-hero-info-icon" size={20} />
+                  <div className="crab-hero-info-label">when</div>
+                  <div className="crab-hero-info-value">
+                    {copy.dates.start} – {copy.dates.end}
+                  </div>
+                </div>
+                <div className="crab-hero-info-item">
+                  <MapPin className="crab-hero-info-icon" size={20} />
+                  <div className="crab-hero-info-label">where</div>
+                  <div className="crab-hero-info-value">{copy.location.venue}</div>
+                  <div className="crab-hero-info-sub">{copy.location.address}</div>
+                </div>
+                <div className="crab-hero-info-item">
+                  <Clock className="crab-hero-info-icon" size={20} />
+                  <div className="crab-hero-info-label">format</div>
+                  <div className="crab-hero-info-value">{copy.dates.duration}</div>
+                </div>
+              </div>
+
+              <div className="crab-hero-cta">
+                <a href="#register" className="crab-button crab-button-primary crab-button-large">
+                  {copy.cta.primary}
+                </a>
+                <a href="#about" className="crab-button crab-button-secondary">
+                  {copy.cta.learnMore}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="crab-stats">
+          <div className="crab-container">
+            <div className="crab-stats-grid">
+              <div className="crab-stat-card">
+                <div className="crab-stat-number">
+                  <AnimatedCounter end={copy.stats.participants} suffix="+" />
+                </div>
+                <div className="crab-stat-label">participants</div>
+                <div className="crab-stat-desc">high school students from across the dmv</div>
+              </div>
+              <div className="crab-stat-card">
+                <div className="crab-stat-number">
+                  <AnimatedCounter end={copy.stats.projects} suffix="+" />
+                </div>
+                <div className="crab-stat-label">projects</div>
+                <div className="crab-stat-desc">innovative solutions built in 48 hours</div>
+              </div>
+              <div className="crab-stat-card">
+                <div className="crab-stat-number">
+                  <AnimatedCounter end={copy.stats.sponsors} suffix="+" />
+                </div>
+                <div className="crab-stat-label">sponsors</div>
+                <div className="crab-stat-desc">supporting the next generation of builders</div>
+              </div>
+              <div className="crab-stat-card">
+                <div className="crab-stat-number">
+                  $<AnimatedCounter end={copy.stats.prizes} />
+                </div>
+                <div className="crab-stat-label">in prizes</div>
+                <div className="crab-stat-desc">across multiple categories and tracks</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="crab-highlights">
+          <div className="crab-container">
+            <h2 className="crab-section-title">what you get</h2>
+            <div className="crab-highlights-grid">
+              <div className="crab-highlight-card">
+                <Pizza className="crab-highlight-icon" size={40} />
+                <h3 className="crab-highlight-title">{copy.info.food}</h3>
+                <p className="crab-highlight-desc">breakfast, lunch, dinner, and snacks throughout the weekend</p>
+              </div>
+              <div className="crab-highlight-card">
+                <Gift className="crab-highlight-icon" size={40} />
+                <h3 className="crab-highlight-title">{copy.info.swag}</h3>
+                <p className="crab-highlight-desc">t-shirts, stickers, and more from our sponsors</p>
+              </div>
+              <div className="crab-highlight-card">
+                <Trophy className="crab-highlight-icon" size={40} />
+                <h3 className="crab-highlight-title">{copy.info.prizes}</h3>
+                <p className="crab-highlight-desc">win cash prizes, gift cards, and tech gear</p>
+              </div>
+              <div className="crab-highlight-card">
+                <Users className="crab-highlight-icon" size={40} />
+                <h3 className="crab-highlight-title">{copy.info.teamSize}</h3>
+                <p className="crab-highlight-desc">hack solo or form teams of up to 4 people</p>
+              </div>
+              <div className="crab-highlight-card">
+                <DollarSign className="crab-highlight-icon" size={40} />
+                <h3 className="crab-highlight-title">{copy.info.free}</h3>
+                <p className="crab-highlight-desc">no registration fees, no hidden costs</p>
+              </div>
+              <div className="crab-highlight-card">
+                <Clock className="crab-highlight-icon" size={40} />
+                <h3 className="crab-highlight-title">{copy.info.format}</h3>
+                <p className="crab-highlight-desc">from friday evening to sunday afternoon</p>
+              </div>
+              <div className="crab-highlight-card">
+                <BookOpen className="crab-highlight-icon" size={40} />
+                <h3 className="crab-highlight-title">{copy.info.workshops}</h3>
+                <p className="crab-highlight-desc">learn web dev, ai, mobile apps, and more</p>
+              </div>
+              <div className="crab-highlight-card">
+                <GraduationCap className="crab-highlight-icon" size={40} />
+                <h3 className="crab-highlight-title">{copy.info.mentors}</h3>
+                <p className="crab-highlight-desc">get help from industry professionals</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="crab-tracks">
+          <div className="crab-container">
+            <h2 className="crab-section-title">hack tracks</h2>
+            <div className="crab-tracks-grid">
+              {copy.tracks.map((track, index) => {
+                const IconComponent = iconMap[track.icon];
+                return (
+                  <div key={index} className="crab-track-card">
+                    {IconComponent && <IconComponent className="crab-track-icon" size={32} />}
+                    <h3 className="crab-track-name">{track.name}</h3>
+                    <p className="crab-track-desc">build projects in this category</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section id="schedule" className="crab-schedule">
+          <div className="crab-container">
+            <h2 className="crab-section-title">schedule</h2>
+            <div className="crab-timeline">
+              <div className="crab-timeline-line"></div>
+              <div className="crab-timeline-day">
+                <h3 className="crab-timeline-day-title">friday</h3>
+                <div className="crab-timeline-events">
+                  {scheduleByDay.friday.map((item, index) => (
+                    <div key={index} className="crab-timeline-item">
+                      <div className="crab-timeline-time">{item.time.replace("friday ", "")}</div>
+                      <div className="crab-timeline-content">
+                        <div className="crab-timeline-dot"></div>
+                        <div className="crab-timeline-event">{item.event}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="crab-timeline-day">
+                <h3 className="crab-timeline-day-title">saturday</h3>
+                <div className="crab-timeline-events">
+                  {scheduleByDay.saturday.map((item, index) => (
+                    <div key={index} className="crab-timeline-item">
+                      <div className="crab-timeline-time">{item.time.replace("saturday ", "")}</div>
+                      <div className="crab-timeline-content">
+                        <div className="crab-timeline-dot"></div>
+                        <div className="crab-timeline-event">{item.event}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="crab-timeline-day">
+                <h3 className="crab-timeline-day-title">sunday</h3>
+                <div className="crab-timeline-events">
+                  {scheduleByDay.sunday.map((item, index) => (
+                    <div key={index} className="crab-timeline-item">
+                      <div className="crab-timeline-time">{item.time.replace("sunday ", "")}</div>
+                      <div className="crab-timeline-content">
+                        <div className="crab-timeline-dot"></div>
+                        <div className="crab-timeline-event">{item.event}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="crab-about">
+          <div className="crab-container">
+            <div className="crab-about-content">
+              <h2 className="crab-section-title">about</h2>
+              <p className="crab-about-text">{copy.event.longDescription}</p>
+              <p className="crab-about-text">
+                {copy.location.directions}
+              </p>
+              <div className="crab-about-cta">
+                <a href="#register" className="crab-button crab-button-primary">
+                  {copy.cta.primary}
+                </a>
+                <a href="#" className="crab-button crab-button-outline">
+                  {copy.cta.secondary}
+                </a>
+                <a href="#" className="crab-button crab-button-outline">
+                  {copy.cta.tertiary}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="crab-sponsors">
+          <div className="crab-container">
+            <h2 className="crab-section-title">our sponsors</h2>
+            <SponsorMarquee />
+          </div>
+        </section>
+
+        <section id="faq" className="crab-faq">
+          <div className="crab-container">
+            <h2 className="crab-section-title">frequently asked questions</h2>
+            <div className="crab-faq-list">
+              {copy.faq.map((item, index) => (
+                <div key={index} className="crab-faq-item">
+                  <button
+                    className="crab-faq-question"
+                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                    aria-expanded={openFaq === index}
+                  >
+                    <span>{item.question}</span>
+                    <span className="crab-faq-icon">
+                      {openFaq === index ? "−" : "+"}
+                    </span>
+                  </button>
+                  {openFaq === index && (
+                    <div className="crab-faq-answer">{item.answer}</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="register" className="crab-register">
+          <div className="crab-container">
+            <div className="crab-register-content">
+              <h2 className="crab-register-title">ready to hack?</h2>
+              <p className="crab-register-text">
+                applications close {copy.dates.registrationDeadline}. spots are limited, so don't wait.
+              </p>
+              <div className="crab-register-cta">
+                <a href="#" className="crab-button crab-button-primary crab-button-large">
+                  {copy.cta.primary}
+                </a>
+                <a href="#" className="crab-button crab-button-outline">
+                  {copy.cta.secondary}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
+      <footer className="crab-footer">
+        <div className="crab-container">
+          <div className="crab-footer-content">
+            <p className="crab-footer-text">
+              questions? reach out at hello@crabhacks.dev
+            </p>
+            <p className="crab-footer-text crab-footer-small">
+              made with 🦀 for the dmv
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
