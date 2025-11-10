@@ -1,7 +1,7 @@
 export const copy = {
   event: {
     name: "crabhacks",
-    tagline: "the largest high school hackathon in the dmv area",
+    tagline: "the coolest high school hackathon in the dmv area",
     year: "2025",
     description: "join us for a day of innovation, collaboration, and creativity. whether you're building your first project or your hundredth, crabhacks is the perfect place to bring your ideas to life.",
     longDescription: "crabhacks brings together the brightest high school students from across the dmv region for an unforgettable day of building, learning, and connecting. compete for prizes, learn from industry mentors, and connect with fellow builders—all while creating something amazing.",
@@ -24,7 +24,7 @@ export const copy = {
   stats: {
     participants: 300,
     projects: 80,
-    sponsors: 15,
+    sponsors: 5,
     prizes: 1000,
   },
   cta: {
@@ -35,7 +35,7 @@ export const copy = {
   },
   info: {
     format: "10-hour hackathon",
-    teamSize: "teams of 1–4",
+    teamSize: "teams of 2–4",
     free: "completely free",
     food: "all meals provided",
     swag: "free swag for all participants",
@@ -76,18 +76,17 @@ export const copy = {
       question: "will there be workshops?",
       answer: "yes! we'll have workshops throughout the day covering topics from beginner web development to advanced machine learning.",
     },
+    {
+      question: "how did crabhacks start?",
+      answer: "CrabHacks was started by Jaden Hou and Tinu Vanapamula as a merger and continuation of older hackathons, Blair Hacks and Poolesville Hacks. In 2024, Jaden Hou and Sarthak Pal Mahajan organized the first CrabHacks which had over 50 attendees and was sponsored by Sentry, Capital Workspaces, UVA, Steve Shen, and Jun Hou.",
+    },
   ],
   sponsors: [
-    { name: "acme corp", tier: "platinum" },
-    { name: "tech solutions inc", tier: "gold" },
-    { name: "digital innovations", tier: "gold" },
-    { name: "code masters", tier: "silver" },
-    { name: "dev labs", tier: "silver" },
-    { name: "startup hub", tier: "silver" },
-    { name: "cloud systems", tier: "bronze" },
-    { name: "data analytics co", tier: "bronze" },
-    { name: "mobile first", tier: "bronze" },
-    { name: "web services", tier: "bronze" },
+    { name: "Capital Workspaces", tier: "partner" },
+    { name: "Sentry", tier: "partner" },
+    { name: "Crackd", tier: "partner" },
+    { name: "Yubico", tier: "partner" },
+    { name: "Interview Cake", tier: "partner" },
   ],
   schedule: [
     { time: "sunday 9:00 am", event: "check-in & breakfast", day: "sunday" },
