@@ -244,6 +244,162 @@ export default function Home() {
           <div className="crab-container">
             <h2 className="crab-section-title">our sponsors</h2>
             <SponsorMarquee />
+            <p className="crab-about-text" style={{ marginTop: 16 }}>
+              we offer four sponsorship tiers: {copy.sponsorship.tiers.join(", ")}. for more info look at the prospectus below.
+            </p>
+            <div className="crab-about-cta" style={{ marginTop: 12 }}>
+              <a
+                href={`mailto:${copy.sponsorship.email}`}
+                className="crab-button crab-button-primary"
+              >
+                become a sponsor
+              </a>
+              <a
+                href={copy.sponsorship.prospectusUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="crab-button crab-button-outline"
+              >
+                view prospectus
+              </a>
+            </div>
+
+            {/* sponsor logos grouped by tier */}
+            <div style={{ marginTop: 24 }}>
+              {copy.sponsorship.tiers.map((tier, tierIndex) => {
+                const tierSponsors = copy.sponsors.filter((s) => s.tier === tier);
+                if (tierSponsors.length === 0) return null;
+
+                // size and layout scale by tier rank (tier 1 is largest)
+                const logoMaxHeight =
+                  tierIndex === 0 ? 100 : tierIndex === 1 ? 88 : tierIndex === 2 ? 82 : 74;
+                const logoMaxWidth =
+                  tierIndex === 0 ? 320 : tierIndex === 1 ? 290 : tierIndex === 2 ? 260 : 230;
+                let gridTemplateColumns =
+                  tierIndex === 0
+                    ? "repeat(auto-fit, minmax(260px, 1fr))"
+                    : tierIndex === 1
+                    ? "repeat(auto-fit, minmax(220px, 1fr))"
+                    : "repeat(auto-fit, minmax(200px, 1fr))";
+                let gridGap = tierIndex === 0 ? 20 : tierIndex === 1 ? 18 : 10;
+                // bring pairs closer together in silver (typeos + indersoft) and bronze (sarah's + yri)
+                if (tierIndex === 2) {
+                  gridTemplateColumns = "repeat(2, auto)";
+                  gridGap = 8;
+                } else if (tierIndex === 3 && tierSponsors.length <= 2) {
+                  gridTemplateColumns = "repeat(2, auto)";
+                  gridGap = 8;
+                }
+
+                return (
+                  <div key={tier} style={{ marginTop: 16 }}>
+                    <p className="crab-about-text" style={{ marginBottom: 8 }}>{`tier ${tierIndex + 1}`}</p>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns,
+                        gap: gridGap,
+                        alignItems: "center",
+                      }}
+                    >
+                      {tierSponsors.map((s, idx) => {
+                        const logo = (s as any).logo as string | undefined;
+                        const url = (s as any).url as string | undefined;
+                        const name = (s.name || "").toLowerCase();
+
+                        // per-sponsor size nudges
+                        let itemMaxHeight = logoMaxHeight;
+                        let itemMaxWidth = logoMaxWidth;
+                        if (name.includes("indersoft")) {
+                          itemMaxHeight += 40;
+                          itemMaxWidth += 140;
+                        } else if (name.includes("crackd")) {
+                          itemMaxHeight += 20;
+                          itemMaxWidth += 80;
+                        } else if (name.includes("yubico")) {
+                          itemMaxHeight -= 6;
+                          itemMaxWidth -= 20;
+                        } else if (name.includes("sarah")) {
+                          itemMaxHeight += 10;
+                          itemMaxWidth += 32;
+                        } else if (name.includes("yri")) {
+                          itemMaxHeight += 10;
+                          itemMaxWidth += 32;
+                        }
+
+                        const content = logo ? (
+                          <img
+                            src={logo}
+                            alt={s.name}
+                            style={{ maxHeight: itemMaxHeight, maxWidth: itemMaxWidth, objectFit: "contain", margin: "0 auto" }}
+                          />
+                        ) : (
+                          <span>{s.name}</span>
+                        );
+                        return (
+                          <div
+                            key={`${tier}-${idx}`}
+                            style={{
+                              textAlign: "center",
+                              padding: "4px 0",
+                              justifySelf: (tierIndex === 2 || tierIndex === 3) ? "center" : "stretch",
+                            }}
+                          >
+                            {url ? (
+                              <a href={url} target="_blank" rel="noopener noreferrer">
+                                {content}
+                              </a>
+                            ) : (
+                              content
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+              {copy.sponsors.filter((s) => !copy.sponsorship.tiers.includes(s.tier)).length > 0 && (
+                <div style={{ marginTop: 16 }}>
+                  <p className="crab-about-text" style={{ marginBottom: 8 }}>other</p>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                      gap: 18,
+                      alignItems: "center",
+                    }}
+                  >
+                    {copy.sponsors
+                      .filter((s) => !copy.sponsorship.tiers.includes(s.tier))
+                      .map((s, idx) => {
+                        const logo = (s as any).logo as string | undefined;
+                        const url = (s as any).url as string | undefined;
+                        const content = logo ? (
+                          <img
+                            src={logo}
+                            alt={s.name}
+                            style={{ maxHeight: 72, maxWidth: 220, objectFit: "contain", margin: "0 auto" }}
+                          />
+                        ) : (
+                          <span>{s.name}</span>
+                        );
+                        return (
+                          <div key={`other-${idx}`} style={{ textAlign: "center", padding: "4px 0" }}>
+                            {url ? (
+                              <a href={url} target="_blank" rel="noopener noreferrer">
+                                {content}
+                              </a>
+                            ) : (
+                              content
+                            )}
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </section>
 

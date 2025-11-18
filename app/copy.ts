@@ -33,6 +33,11 @@ export const copy = {
     tertiary: "become a sponsor",
     learnMore: "learn more",
   },
+  sponsorship: {
+    tiers: ["platinum", "gold", "silver", "bronze"],
+    email: "team@crabhacks.org",
+    prospectusUrl: "/CrabHacks 2025 Prospectus (3).pdf",
+  },
   info: {
     format: "10-hour hackathon",
     teamSize: "teams of 2–4",
@@ -82,11 +87,23 @@ export const copy = {
     },
   ],
   sponsors: [
-    { name: "Capital Workspaces", tier: "partner" },
-    { name: "Sentry", tier: "partner" },
-    { name: "Crackd", tier: "partner" },
-    { name: "Yubico", tier: "partner" },
-    { name: "Interview Cake", tier: "partner" },
+    // tier 1 — platinum
+    { name: "Interview Cake", tier: "platinum", url: "https://www.interviewcake.com/", logo: "/InterviewCake.svg" },
+    { name: "Capital Workspaces", tier: "platinum", logo: "/CapitalWorkspaces.png" },
+    { name: "Solana Foundation", tier: "platinum", url: "https://solana.org/", logo: "/solana.png" },
+
+    // tier 2 — gold
+    { name: "Yubico", tier: "gold", url: "https://www.yubico.com/", logo: "/Yubico.png" },
+    { name: "Crackd", tier: "gold", url: "https://crackd.it/", logo: "/crackd.png" },
+    { name: "Sentry", tier: "gold", url: "https://sentry.io/", logo: "/Sentry.png" },
+
+    // tier 3 — silver
+    { name: "TypeOS", tier: "silver", url: "https://typeos.com/", logo: "/TypeOS.svg" },
+    { name: "Indersoft", tier: "silver", url: "http://indersoft.com/", logo: "/Indersoft.png" },
+
+    // tier 4 — bronze
+    { name: "Sarah's Handmade Ice Cream", tier: "bronze", url: "https://sarahshandmadeicecream.com/", logo: "/SarahsHandmade.jpg" },
+    { name: "YRI Fellowship", tier: "bronze", url: "https://www.yriscience.com/", logo: "/YRIScience.png" },
   ],
   schedule: [
     { time: "sunday 9:00 am", event: "check-in & breakfast", day: "sunday" },
@@ -95,7 +112,7 @@ export const copy = {
     { time: "sunday 12:00 pm", event: "lunch", day: "sunday" },
     { time: "sunday 1:00 pm", event: "workshop session", day: "sunday" },
     { time: "sunday 3:00 pm", event: "afternoon snack break", day: "sunday" },
-    { time: "sunday 4:00 pm", event: "mentor office hours", day: "sunday" },
+    { time: "sunday 4:00 pm", event: "ice cream with the founder of sarah's handmade ice cream", day: "sunday" },
     { time: "sunday 5:00 pm", event: "hacking ends & submissions due", day: "sunday" },
     { time: "sunday 5:30 pm", event: "judging & demos", day: "sunday" },
     { time: "sunday 6:30 pm", event: "closing ceremony & prizes", day: "sunday" },
