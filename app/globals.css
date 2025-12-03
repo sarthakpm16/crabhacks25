@@ -701,6 +701,139 @@ body {
   }
 }
 
+.crab-infinite-scroll-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.crab-infinite-scroll-wrapper::before,
+.crab-infinite-scroll-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.crab-infinite-scroll-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--sand), transparent);
+}
+
+.crab-infinite-scroll-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--sand), transparent);
+}
+
+.crab-infinite-scroll-track {
+  display: flex;
+  width: fit-content;
+  animation: infinite-scroll linear infinite;
+  will-change: transform;
+}
+
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crab-infinite-scroll-track {
+    animation: none;
+  }
+}
+
+.crab-infinite-scroll-content {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.crab-infinite-scroll-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.crab-infinite-scroll-item img {
+  display: block;
+}
+
+.crab-infinite-scroll-item a {
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.crab-infinite-scroll-item a:hover {
+  opacity: 0.7;
+}
+
+.crab-team {
+  padding: 4rem 0;
+  background: var(--white);
+  border-bottom: 1px solid var(--charcoal);
+}
+
+.crab-team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.crab-team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.crab-team-headshot {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--charcoal);
+  background: var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crab-team-headshot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.crab-team-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  text-transform: lowercase;
+  font-family: var(--font-space-mono), monospace;
+}
+
+.crab-team-role {
+  font-size: 0.875rem;
+  color: var(--charcoal);
+  opacity: 0.7;
+  text-transform: lowercase;
+  font-family: var(--font-space-mono), monospace;
+}
+
 .crab-faq {
   padding: 4rem 0;
   background: var(--white);
@@ -913,6 +1046,10 @@ body {
   }
 
   .crab-tracks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .crab-team-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
