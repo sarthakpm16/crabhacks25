@@ -9,8 +9,12 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CrabHacks 2024",
+  title: "CrabHacks 2025",
   description: "The largest hackathon in the DMV area. Join us for a weekend of innovation, collaboration, and creativity.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { copy } from "./copy";
 import { AnimatedCounter } from "./components/AnimatedCounter";
-import { SponsorMarquee } from "./components/SponsorMarquee";
+import { InfiniteSponsorScroll } from "./components/InfiniteSponsorScroll";
 import { 
   Globe, Smartphone, Brain, Zap, Cloud, Link,
   Pizza, Gift, Trophy, Users, DollarSign, Clock,
@@ -65,14 +65,15 @@ export default function Home() {
                   <MapPin className="crab-hero-info-icon" size={20} />
                   <div className="crab-hero-info-label">when</div>
                   <div className="crab-hero-info-value">
-                    {copy.dates.start} – {copy.dates.end}
+                    {copy.dates.start === copy.dates.end
+                      ? copy.dates.start
+                      : `${copy.dates.start} – ${copy.dates.end}`}
                   </div>
                 </div>
                 <div className="crab-hero-info-item">
                   <MapPin className="crab-hero-info-icon" size={20} />
                   <div className="crab-hero-info-label">where</div>
                   <div className="crab-hero-info-value">{copy.location.venue}</div>
-                  <div className="crab-hero-info-sub">{copy.location.address}</div>
                 </div>
                 <div className="crab-hero-info-item">
                   <Clock className="crab-hero-info-icon" size={20} />
@@ -82,7 +83,7 @@ export default function Home() {
               </div>
 
               <div className="crab-hero-cta">
-                <a href="#register" className="crab-button crab-button-primary crab-button-large">
+                <a href="https://luma.com/gkia37vs" target="_blank" rel="noopener noreferrer" className="crab-button crab-button-primary crab-button-large">
                   {copy.cta.primary}
                 </a>
                 <a href="#about" className="crab-button crab-button-secondary">
@@ -98,17 +99,17 @@ export default function Home() {
             <div className="crab-stats-grid">
               <div className="crab-stat-card">
                 <div className="crab-stat-number">
-                  <AnimatedCounter end={copy.stats.participants} suffix="+" />
+                  50–100
                 </div>
                 <div className="crab-stat-label">participants</div>
                 <div className="crab-stat-desc">high school students from across the dmv</div>
               </div>
               <div className="crab-stat-card">
                 <div className="crab-stat-number">
-                  <AnimatedCounter end={copy.stats.projects} suffix="+" />
+                  $7.5k+
                 </div>
-                <div className="crab-stat-label">projects</div>
-                <div className="crab-stat-desc">innovative solutions built in 48 hours</div>
+                <div className="crab-stat-label">raised</div>
+                <div className="crab-stat-desc">raised to power the event</div>
               </div>
               <div className="crab-stat-card">
                 <div className="crab-stat-number">
@@ -135,7 +136,7 @@ export default function Home() {
               <div className="crab-highlight-card">
                 <Pizza className="crab-highlight-icon" size={40} />
                 <h3 className="crab-highlight-title">{copy.info.food}</h3>
-                <p className="crab-highlight-desc">breakfast, lunch, dinner, and snacks throughout the weekend</p>
+                <p className="crab-highlight-desc">breakfast, lunch, dinner, and snacks throughout the day</p>
               </div>
               <div className="crab-highlight-card">
                 <Gift className="crab-highlight-icon" size={40} />
@@ -150,7 +151,7 @@ export default function Home() {
               <div className="crab-highlight-card">
                 <Users className="crab-highlight-icon" size={40} />
                 <h3 className="crab-highlight-title">{copy.info.teamSize}</h3>
-                <p className="crab-highlight-desc">hack solo or form teams of up to 4 people</p>
+                <p className="crab-highlight-desc">form teams of 2–4 people</p>
               </div>
               <div className="crab-highlight-card">
                 <DollarSign className="crab-highlight-icon" size={40} />
@@ -160,7 +161,7 @@ export default function Home() {
               <div className="crab-highlight-card">
                 <Clock className="crab-highlight-icon" size={40} />
                 <h3 className="crab-highlight-title">{copy.info.format}</h3>
-                <p className="crab-highlight-desc">from friday evening to sunday afternoon</p>
+                <p className="crab-highlight-desc">all day sunday</p>
               </div>
               <div className="crab-highlight-card">
                 <BookOpen className="crab-highlight-icon" size={40} />
@@ -178,7 +179,7 @@ export default function Home() {
 
         <section className="crab-tracks">
           <div className="crab-container">
-            <h2 className="crab-section-title">hack tracks</h2>
+            <h2 className="crab-section-title">build projects in:</h2>
             <div className="crab-tracks-grid">
               {copy.tracks.map((track, index) => {
                 const IconComponent = iconMap[track.icon];
@@ -186,7 +187,6 @@ export default function Home() {
                   <div key={index} className="crab-track-card">
                     {IconComponent && <IconComponent className="crab-track-icon" size={32} />}
                     <h3 className="crab-track-name">{track.name}</h3>
-                    <p className="crab-track-desc">build projects in this category</p>
                   </div>
                 );
               })}
@@ -199,34 +199,6 @@ export default function Home() {
             <h2 className="crab-section-title">schedule</h2>
             <div className="crab-timeline">
               <div className="crab-timeline-line"></div>
-              <div className="crab-timeline-day">
-                <h3 className="crab-timeline-day-title">friday</h3>
-                <div className="crab-timeline-events">
-                  {scheduleByDay.friday.map((item, index) => (
-                    <div key={index} className="crab-timeline-item">
-                      <div className="crab-timeline-time">{item.time.replace("friday ", "")}</div>
-                      <div className="crab-timeline-content">
-                        <div className="crab-timeline-dot"></div>
-                        <div className="crab-timeline-event">{item.event}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="crab-timeline-day">
-                <h3 className="crab-timeline-day-title">saturday</h3>
-                <div className="crab-timeline-events">
-                  {scheduleByDay.saturday.map((item, index) => (
-                    <div key={index} className="crab-timeline-item">
-                      <div className="crab-timeline-time">{item.time.replace("saturday ", "")}</div>
-                      <div className="crab-timeline-content">
-                        <div className="crab-timeline-dot"></div>
-                        <div className="crab-timeline-event">{item.event}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
               <div className="crab-timeline-day">
                 <h3 className="crab-timeline-day-title">sunday</h3>
                 <div className="crab-timeline-events">
@@ -251,14 +223,14 @@ export default function Home() {
               <h2 className="crab-section-title">about</h2>
               <p className="crab-about-text">{copy.event.longDescription}</p>
               <p className="crab-about-text">
+                crabhacks includes elements of both tech and entrepreneurship, making it a unique hackathon incorporating startup ideologies.
+              </p>
+              <p className="crab-about-text">
                 {copy.location.directions}
               </p>
               <div className="crab-about-cta">
-                <a href="#register" className="crab-button crab-button-primary">
+                <a href="https://luma.com/gkia37vs" target="_blank" rel="noopener noreferrer" className="crab-button crab-button-primary">
                   {copy.cta.primary}
-                </a>
-                <a href="#" className="crab-button crab-button-outline">
-                  {copy.cta.secondary}
                 </a>
                 <a href="#" className="crab-button crab-button-outline">
                   {copy.cta.tertiary}
@@ -271,7 +243,63 @@ export default function Home() {
         <section className="crab-sponsors">
           <div className="crab-container">
             <h2 className="crab-section-title">our sponsors</h2>
-            <SponsorMarquee />
+            <p className="crab-about-text" style={{ marginTop: 16 }}>
+              we offer four sponsorship tiers: {copy.sponsorship.tiers.join(", ")}. for more info look at the prospectus below.
+            </p>
+            <div className="crab-about-cta" style={{ marginTop: 12 }}>
+              <a
+                href={`mailto:${copy.sponsorship.email}`}
+                className="crab-button crab-button-primary"
+              >
+                become a sponsor
+              </a>
+              <a
+                href={copy.sponsorship.prospectusUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="crab-button crab-button-outline"
+              >
+                view prospectus
+              </a>
+            </div>
+
+            {copy.sponsorship.tiers.map((tier, tierIndex) => {
+              const tierSponsors = copy.sponsors.filter((s) => s.tier === tier);
+              if (tierSponsors.length === 0) return null;
+
+              return (
+                <div key={tier} style={{ marginTop: 32 }}>
+                  <p className="crab-about-text" style={{ marginBottom: 12 }}>{`tier ${tierIndex + 1}`}</p>
+                  <InfiniteSponsorScroll sponsors={tierSponsors} tierIndex={tierIndex} />
+                </div>
+              );
+            })}
+            {copy.sponsors.filter((s) => !copy.sponsorship.tiers.includes(s.tier)).length > 0 && (
+              <div style={{ marginTop: 32 }}>
+                <p className="crab-about-text" style={{ marginBottom: 12 }}>other</p>
+                <InfiniteSponsorScroll 
+                  sponsors={copy.sponsors.filter((s) => !copy.sponsorship.tiers.includes(s.tier))} 
+                  tierIndex={4} 
+                />
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section id="team" className="crab-team">
+          <div className="crab-container">
+            <h2 className="crab-section-title">our team</h2>
+            <div className="crab-team-grid">
+              {copy.team.map((member, index) => (
+                <div key={index} className="crab-team-card">
+                  <div className="crab-team-headshot">
+                    <img src="/klinn.png" alt={member.name} />
+                  </div>
+                  <div className="crab-team-name">{member.name}</div>
+                  <div className="crab-team-role">{member.role}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -308,11 +336,8 @@ export default function Home() {
                 applications close {copy.dates.registrationDeadline}. spots are limited, so don't wait.
               </p>
               <div className="crab-register-cta">
-                <a href="#" className="crab-button crab-button-primary crab-button-large">
+                <a href="https://luma.com/gkia37vs" target="_blank" rel="noopener noreferrer" className="crab-button crab-button-primary crab-button-large">
                   {copy.cta.primary}
-                </a>
-                <a href="#" className="crab-button crab-button-outline">
-                  {copy.cta.secondary}
                 </a>
               </div>
             </div>
@@ -324,7 +349,7 @@ export default function Home() {
         <div className="crab-container">
           <div className="crab-footer-content">
             <p className="crab-footer-text">
-              questions? reach out at hello@crabhacks.dev
+              questions? reach out at team@crabhacks.org
             </p>
             <p className="crab-footer-text crab-footer-small">
               made with 🦀 for the dmv
