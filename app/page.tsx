@@ -106,7 +106,7 @@ export default function Home() {
               </div>
               <div className="crab-stat-card">
                 <div className="crab-stat-number">
-                  $7.5k+
+                  $15k+
                 </div>
                 <div className="crab-stat-label">raised</div>
                 <div className="crab-stat-desc">raised to power the event</div>
@@ -293,7 +293,7 @@ export default function Home() {
               {copy.team.map((member, index) => (
                 <div key={index} className="crab-team-card">
                   <div className="crab-team-headshot">
-                    <img src="/klinn.png" alt={member.name} />
+                    <img src={(member as any).photo || "/klinn.png"} alt={member.name} />
                   </div>
                   <div className="crab-team-name">{member.name}</div>
                   <div className="crab-team-role">{member.role}</div>
