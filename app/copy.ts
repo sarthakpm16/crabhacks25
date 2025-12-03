@@ -104,6 +104,8 @@ export const copy = {
     // tier 4 — bronze
     { name: "Sarah's Handmade Ice Cream", tier: "bronze", url: "https://sarahshandmadeicecream.com/", logo: "/SarahsHandmade.jpg" },
     { name: "YRI Fellowship", tier: "bronze", url: "https://www.yriscience.com/", logo: "/YRIScience.png" },
+    { name: "Klinn", tier: "bronze", logo: "/klinn.png" },
+    { name: "Parv", tier: "bronze" },
   ],
   schedule: [
     { time: "sunday 9:00 am", event: "check-in & breakfast", day: "sunday" },
@@ -111,6 +113,7 @@ export const copy = {
     { time: "sunday 10:00 am", event: "hacking begins", day: "sunday" },
     { time: "sunday 12:00 pm", event: "lunch", day: "sunday" },
     { time: "sunday 1:00 pm", event: "workshop session", day: "sunday" },
+    { time: "sunday 2:00 pm", event: "talk with cory levy from zfellows", day: "sunday" },
     { time: "sunday 3:00 pm", event: "afternoon snack break", day: "sunday" },
     { time: "sunday 4:00 pm", event: "ice cream with the founder of sarah's handmade ice cream", day: "sunday" },
     { time: "sunday 5:00 pm", event: "hacking ends & submissions due", day: "sunday" },
@@ -125,5 +128,16 @@ export const copy = {
     { name: "hardware", icon: "zap" },
     { name: "devops", icon: "cloud" },
     { name: "blockchain", icon: "link" },
+  ],
+  team: [
+    { name: "sarthak pal mahajan", role: "executive director" },
+    { name: "jaden hou", role: "founder/advisor" },
+    { name: "daniel gao", role: "advisor" },
+    { name: "mishelle munkhbatt", role: "marketing lead" },
+    { name: "navya rachakonda", role: "finance lead" },
+    { name: "kofi hair-ralston", role: "tech lead" },
+    { name: "allen du", role: "marketing lead" },
+    { name: "ishaan nanda", role: "finance lead" },
+    { name: "catherine aixinjueluo", role: "art & design lead" },
   ],
 };
