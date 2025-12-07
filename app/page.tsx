@@ -99,7 +99,7 @@ export default function Home() {
             <div className="crab-stats-grid">
               <div className="crab-stat-card">
                 <div className="crab-stat-number">
-                  50–100
+                  85-100
                 </div>
                 <div className="crab-stat-label">participants</div>
                 <div className="crab-stat-desc">high school students from across the dmv</div>
